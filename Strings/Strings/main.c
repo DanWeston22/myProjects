@@ -27,6 +27,7 @@ int main(int argc, const char * argv[]) {
     char surname[20];
     fgets(surname, 20, stdin);
     
+
     //Concentrates forename & surname into full name
     char *fullname;
     fullname = strcat(forename, surname);
@@ -35,5 +36,12 @@ int main(int argc, const char * argv[]) {
     printf("Your Name Is: ");
     puts(fullname);
     
+    //Special Message
+    char danWeston[20] = "Dan Weston\n";
+    if (strcmp(fullname, danWeston) ==0){
+        printf("You're The Special One!\n");
+    }
+
     return 0;
+    
 }
