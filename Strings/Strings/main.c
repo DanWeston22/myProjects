@@ -7,9 +7,33 @@
 //
 
 #include <stdio.h>
+#include <string.h>
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    printf("Hello, World!\n");
+
+    // Gets forename from command line
+    printf("Enter Forename:\n");
+    char forename[20];
+    fgets(forename, 20, stdin);
+    
+    //Remove newline
+    size_t len;
+    len = strlen(forename);
+    if( forename[len-1] == '\n' )
+        forename[len-1] = ' ';
+    
+    // Gets surname from command line
+    printf("Enter Surname:\n");
+    char surname[20];
+    fgets(surname, 20, stdin);
+    
+    //Concentrates forename & surname into full name
+    char *fullname;
+    fullname = strcat(forename, surname);
+    
+    //Prints Full Name
+    printf("Your Name Is: ");
+    puts(fullname);
+    
     return 0;
 }
