@@ -12,22 +12,23 @@ int main(int argc, const char * argv[]) {
 
     //float samples[48000]; //Array of 48000 samples
     
-    float timingValue[100];                                                 //Stores up to 100 values in timingValue array
-    float midiValue[100];                                                   //Stores up to 100 values in timingValue array
+    float timingValue[100];                                     //Stores up to 100 values in timingValue array
+    float midiValue[100];                                       //Stores up to 100 values in timingValue array
     
-    int timingCount = 0;                                                    //Sets timingCount to zero
-    for (timingCount=0; timingCount<100; timingCount++){                    //Counts values added to the 1st column of the values array
+    int inputCount = 0;                                         //Sets timingCount to zero
+    for (inputCount = 0; inputCount < 100; inputCount++){       //Counts values added to the 1st column of the values array
         float timingInput;
-        timingValue[timingCount] = scanf(".6%f", &timingInput);             //Sets timingValue array with value [timingCount] timingInput value
-    }
-    
-    int midiCount = 0;                                                      //Sets midiCount to zero
-    for (midiCount=0; midiCount<100; midiCount++){                          //Counts values added to the 2nd column of the values array
+        scanf("%f", &timingInput);
+        timingValue[inputCount] = timingInput;                  //Sets timingValue array with value [inputCount] timingInput value
+        
         float midiInput;
-        midiValue[midiCount] = scanf(".6%f", &midiInput);                   //Sets midiValue array with value [midiCount] midiInput value
+        scanf("%f", &midiInput);
+        midiValue[inputCount] = midiInput;                      //Sets midiValue array with value [inputCount] midiInput value
     }
     
-    printf ("User input not in a recognised format\n");                     //Prints error message when input isn't in the correct format
+    
+    
+    printf ("User input not in a recognised format\n");         //Prints error message when input isn't in the correct format
     
     return 0;
 }
