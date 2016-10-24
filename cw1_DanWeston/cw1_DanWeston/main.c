@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main(int argc, const char * argv[]) {
 
@@ -16,8 +17,8 @@ int main(int argc, const char * argv[]) {
     float timingValue[100];                                     //Stores up to 100 values in timingValue array
     float midiValue[100];                                       //Stores up to 100 values in timingValue array
     
-    int inputCount = 0;                                         //Sets timingCount to zero
-    for (inputCount = 0; inputCount < 100; inputCount++){       //Counts values added to the 1st column of the values array
+    int inputCount = 0.0;                                         //Sets timingCount to zero
+    for (inputCount = 0.0; inputCount < 100.0; inputCount++){       //Counts values added to the 1st column of the values array
         float timingInput;
         int isNumber = scanf("%f", &timingInput);               //Lets user input Timing Information Value
         if (isNumber != 1) {                                    //If scanf didn't find a number to convert then..
