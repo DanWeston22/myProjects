@@ -24,11 +24,16 @@ int main(int argc, const char * argv[]) {
         float midiInput;
         scanf("%f", &midiInput);
         midiValue[inputCount] = midiInput;                      //Sets midiValue array with value [inputCount] midiInput value
+        
+        if (-128 > midiInput) {
+            printf ("The MIDI ‘note on’ message contains data out of bounds\n"); //Error message when MIDI data isn't valid
+            break;
+        }
+        else if (midiInput > 127) {
+            printf ("The MIDI ‘note on’ message contains data out of bounds\n"); //Error message when MIDI data isn't valid
+            break;
+        }
     }
-    
-    
-    
-    printf ("User input not in a recognised format\n");         //Prints error message when input isn't in the correct format
     
     return 0;
 }
@@ -45,14 +50,9 @@ int main(int argc, const char * argv[]) {
 
 /////////////////////////////////////////////////////////
 
-//Error for invalid MIDI value
+//Error for inccorect input format
 
-//if (-128 < midiValue < 127) { //Checks that MIDI value is valid
-    //break;
-//}
-//else {
-    //printf ("The MIDI ‘note on’ message contains data out of bounds\n"); //Error message when MIDI data isn't valid
-//}
+//printf ("User input not in a recognised format\n");         //Prints error message when input isn't in the correct format
 
 /////////////////////////////////////////////////////////
 
@@ -61,3 +61,8 @@ int main(int argc, const char * argv[]) {
 //if (timingInformation == '-help'){
     //printf ("Please enter Timing Information and MIDI Note Numbers in the following format:\n<time in milliseconds> <MIDI note number>\n"); //Prints format that user should input MIDI & Timing information.
 //}
+
+
+
+
+
