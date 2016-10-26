@@ -31,7 +31,7 @@ int main(int argc, const char * argv[]) {
     for (inputCount = 0.0; inputCount < 100.0; inputCount++){   //Counts values added to the 1st column of the values array
         float timingInput;
         scanf("%f", &timingInput);                              //Lets user input Timing Information Value
-        timingValue[inputCount] = timingInput;             //Sets timingValue array with value [inputCount] timingInput value
+        timingValue[inputCount] = timingInput;                  //Sets timingValue array with value [inputCount] timingInput value
                                                                 //And converts it to seconds
         float midiInput;
         scanf("%f", &midiInput);                                //Lets user input MIDI Value
@@ -40,24 +40,26 @@ int main(int argc, const char * argv[]) {
         if (127 < midiInput) {                                                      //Checks if MIDIInput value is > 127
             printf ("The MIDI ‘note on’ message contains data out of bounds\n");    //Error message when MIDI data isn't valid
             return 2;                                                               //Breaks out of loop and ends programme
-
+        }
+        
+        if (timingValue[inputCount-1] > timingValue[inputCount]){                           //Checks if time values are increasing
+            printf("The time values need to be non-negative and increasing in value\n");    //If not prints error
+            return 3;
         }
     
-        else if (midiInput < 0) {                                                   //Checks if MIDIInput value is < 0
+        else if (midiInput < 0 || inputCount == 99) {                                 //Checks if MIDIInput value is < 0
             
-            for (int inputNumber = 0.0; inputNumber <= inputCount; ++inputNumber) {      //For loop to cycle through input values
+            for (int inputNumber = 0.0; inputNumber <= inputCount; ++inputNumber) {     //For loop to cycle through input values
                 float time = (timingValue[inputNumber-1] + timingValue[inputNumber]);   //Calculates time to run from timingValues
                 float frequency = 440 * pow(2, ((midiValue[inputNumber] - 69)/12));     //Calculates Frequency from midiValues
                 float sum = timingValue[inputNumber];
-                sum += timingValue[inputNumber+1];                                            //Sums values of array timingValue
+                sum += timingValue[inputNumber+1];                                          //Sums values of array timingValue
                 for (time = (timingValue[inputNumber]); time < (sum); time++){              //For loop for sample value calculation
                     double sineWave = sin(2 * M_PI * frequency * (time/sampleFrequency));   //Calculates the sample values
                     printf("%.5f\t", sineWave);                                             //Prints sample values
                     printf("%f\n", time/sampleFrequency);                                   //Prints time
                 }
             }
-             //printf ("The MIDI ‘note on’ message contains data out of bounds\n");      //Error message when MIDI data isn't valid
-            //return 2;                                                                 //Breaks out of loop and ends programme
         }
     }
     return 0;
