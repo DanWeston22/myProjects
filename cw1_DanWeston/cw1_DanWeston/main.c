@@ -30,13 +30,21 @@ int main(int argc, const char * argv[]) {
     int inputCount = 0.0;                                       //Sets timingCount to zero
     for (inputCount = 0.0; inputCount < 100.0; inputCount++){   //Counts values added to the 1st column of the values array
         float timingInput;
-        scanf("%f", &timingInput);                              //Lets user input Timing Information Value
+        int isNumber = scanf("%f", &timingInput);               //Lets user input Timing Information Value
+        if (isNumber != 1) {                                    //If scanf didn't find a number to convert then..
+            printf ("User input not in a recognised format\n"); //Prints error message when input isn't in the correct format
+            break;
+        }
+
         timingValue[inputCount] = timingInput;                  //Sets timingValue array with value [inputCount] timingInput value
                                                                 //And converts it to seconds
+
+        
         float midiInput;
         scanf("%f", &midiInput);                                //Lets user input MIDI Value
         midiValue[inputCount] = midiInput;                      //Sets midiValue array with value [inputCount] midiInput value
-    
+        
+        
         if (127 < midiInput) {                                                      //Checks if MIDIInput value is > 127
             printf ("The MIDI ‘note on’ message contains data out of bounds\n");    //Error message when MIDI data isn't valid
             return 2;                                                               //Breaks out of loop and ends programme
