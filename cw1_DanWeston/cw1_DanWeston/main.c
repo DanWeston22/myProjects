@@ -58,10 +58,9 @@ int main(int argc, const char * argv[]) {
             for (int inputNumber = 0.0; inputNumber <= inputCount; ++inputNumber) {     //For loop to cycle through input values
                 float time = (timingValue[inputNumber-1] + timingValue[inputNumber]);   //Calculates time to run from timingValues
                 float frequency = 440.0 * pow(2.0, ((midiValue[inputNumber] - 69.0)/12.0)); //Calculates Frequency from midiValues
-                for (time = timingValue[inputNumber]; time < timingValue[inputNumber+1]; time = (time + (1000.0/sampleFrequency))){              //For loop for sample value calculation
-                    double sineWave = sin(2 * M_PI * frequency * (time/1000));                     //Calculates the sample values
-                    printf("%.5f\t", sineWave);                                             //Prints sample values
-                    printf("%f\n", time/sampleFrequency);                                   //Prints time
+                for (time = timingValue[inputNumber]; time < timingValue[inputNumber+1]; time = (time + (1000.0/sampleFrequency))){                                                                   //For loop for sample value calculation
+                    double sineWave = sin(2 * M_PI * frequency * (time/1000));          //Calculates the sample values
+                    printf("%.6f\n", sineWave);                                         //Prints sample values
                 }
             }
         }
