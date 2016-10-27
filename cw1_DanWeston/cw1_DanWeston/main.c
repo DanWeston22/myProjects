@@ -22,7 +22,7 @@ int main(int argc, const char * argv[]) {
             return 1;
         }
         else {
-            printf("User input not in a recognised format");
+            printf("User input not in a recognised format\n");
             return 1;
         }
     }
@@ -38,8 +38,6 @@ int main(int argc, const char * argv[]) {
 
         timingValue[inputCount] = timingInput;                  //Sets timingValue array with value [inputCount] timingInput value
                                                                 //And converts it to seconds
-
-        
         float midiInput;
         scanf("%f", &midiInput);                                //Lets user input MIDI Value
         midiValue[inputCount] = midiInput;                      //Sets midiValue array with value [inputCount] midiInput value
@@ -55,15 +53,13 @@ int main(int argc, const char * argv[]) {
             return 3;
         }
     
-        else if (midiInput < 0 || inputCount == 99) {                                 //Checks if MIDIInput value is < 0
-            
+        else if (midiInput < 0 || inputCount == 99) {                                   //Checks if MIDIInput value is < 0
+                                                                                        //Or if inputCount has reached 99
             for (int inputNumber = 0.0; inputNumber <= inputCount; ++inputNumber) {     //For loop to cycle through input values
                 float time = (timingValue[inputNumber-1] + timingValue[inputNumber]);   //Calculates time to run from timingValues
-                float frequency = 440 * pow(2, ((midiValue[inputNumber] - 69)/12));     //Calculates Frequency from midiValues
-                float sum = timingValue[inputNumber];
-                sum += timingValue[inputNumber+1];                                          //Sums values of array timingValue
-                for (time = (timingValue[inputNumber]); time < (sum); time++){              //For loop for sample value calculation
-                    double sineWave = sin(2 * M_PI * frequency * (time/sampleFrequency));   //Calculates the sample values
+                float frequency = 440.0 * pow(2.0, ((midiValue[inputNumber] - 69.0)/12.0)); //Calculates Frequency from midiValues
+                for (time = timingValue[inputNumber]; time < timingValue[inputNumber+1]; time = (time + (1000.0/sampleFrequency))){              //For loop for sample value calculation
+                    double sineWave = sin(2 * M_PI * frequency * (time/1000));                     //Calculates the sample values
                     printf("%.5f\t", sineWave);                                             //Prints sample values
                     printf("%f\n", time/sampleFrequency);                                   //Prints time
                 }
