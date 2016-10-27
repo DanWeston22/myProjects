@@ -12,7 +12,7 @@
 
 int main(int argc, const char * argv[]) {
 
-    const int sampleFrequency = 48000;                          //Sets sampleFrequency to 48kHz
+    const int sampleFrequency = 48000.0;                          //Sets sampleFrequency to 48kHz
     float timingValue[100];                                     //Stores up to 100 values in timingValue array
     float midiValue[100];                                       //Stores up to 100 values in timingValue array
     
@@ -57,10 +57,13 @@ int main(int argc, const char * argv[]) {
                                                                                         //Or if inputCount has reached 99
             for (int inputNumber = 0.0; inputNumber <= inputCount; ++inputNumber) {     //For loop to cycle through input values
                 float time = (timingValue[inputNumber-1] + timingValue[inputNumber]);   //Calculates time to run from timingValues
-                float frequency = 440.0 * pow(2.0, ((midiValue[inputNumber] - 69.0)/12.0)); //Calculates Frequency from midiValues
+                float frequency = 440.0 * pow(2.0, ((midiValue[inputNumber] - 69.0)/12.0)); //Calculates Frequency from midiValue
+                float omega = (2.0 * M_PI * frequency);                                 //Sets omega to equal 2πf
+                float phase = 0.0;                                                      //Sets phase to zero
                 for (time = timingValue[inputNumber]; time < timingValue[inputNumber+1]; time = (time + (1000.0/sampleFrequency))){                                                                   //For loop for sample value calculation
-                    double sineWave = sin(2 * M_PI * frequency * (time/1000));          //Calculates the sample values
+                    float sineWave = sin(phase);                                        //Calculates the sample values
                     printf("%.6f\n", sineWave);                                         //Prints sample values
+                    phase += (omega/sampleFrequency);                                   //Adds 2πf/SR to phase
                 }
             }
         }
