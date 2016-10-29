@@ -40,23 +40,22 @@ int main(int argc, const char * argv[]) {
         char *token = NULL;
         const char delim[] = " ";
         char *stopString;
+        int i;
+        
+        for (i = 0; line[i] != 0; i++){
+            if ((isalpha(line[i]) != 0) || (ispunct(line[i]) != 0)){
+                printf ("User input not in a recognised format..\n"); //Prints error message when input isn't in the correct format
+                return 2;
+            }
+        }
         
         token = strtok(line, delim);
-        
-        if (isdigit(*token) == 0){
-            printf ("User input not in a recognised format..\n"); //Prints error message when input isn't in the correct format
-            return 2;
-        }
 
         timingInputValue = strtof(token, &stopString);
         
         token = strtok(NULL, delim);
         if (token == NULL){
             printf ("User input not in a recognised format\n"); //Prints error message when input isn't in the correct format
-            return 2;
-        }
-        if (isdigit(*token) == 0){
-            printf ("User input not in a recognised format..\n"); //Prints error message when input isn't in the correct format
             return 2;
         }
         midiInputValue = strtof(token, &stopString);
@@ -98,10 +97,9 @@ int main(int argc, const char * argv[]) {
                 printf("%.6f\n", sampleValues);                                         //Prints sample values
                 phase += (omega/sampleFrequency);                                   //Adds 2πf/SR to phase
             }
-        }
-    return 0;
     }
-
+    return 0;
+}
 //BUGS
 
 //If less or more than 2 numbers are entered on a line it doesnt give an error message (Try using fgets & sscanf or getline)
