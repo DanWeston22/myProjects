@@ -10,6 +10,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 int main(int argc, const char * argv[]) {
 
@@ -41,11 +42,21 @@ int main(int argc, const char * argv[]) {
         char *stopString;
         
         token = strtok(line, delim);
+        
+        if (isdigit(*token) == 0){
+            printf ("User input not in a recognised format..\n"); //Prints error message when input isn't in the correct format
+            return 2;
+        }
+
         timingInputValue = strtof(token, &stopString);
         
         token = strtok(NULL, delim);
         if (token == NULL){
             printf ("User input not in a recognised format\n"); //Prints error message when input isn't in the correct format
+            return 2;
+        }
+        if (isdigit(*token) == 0){
+            printf ("User input not in a recognised format..\n"); //Prints error message when input isn't in the correct format
             return 2;
         }
         midiInputValue = strtof(token, &stopString);
@@ -55,6 +66,7 @@ int main(int argc, const char * argv[]) {
             printf ("User input not in a recognised format..\n"); //Prints error message when input isn't in the correct format
             return 2;
         }
+
         timingValues[numberOfInputLines] = timingInputValue;                  //Sets timingValue array with value [inputCount] timingInput value
         
         midiValues[numberOfInputLines] = midiInputValue;                      //Sets midiValue array with value [inputCount] midiInput value
@@ -64,7 +76,7 @@ int main(int argc, const char * argv[]) {
             return 2;
         }
         
-        if (timingValues[numberOfInputLines] > timingValues[numberOfInputLines]){                   //Checks if time values are increasing
+        if (timingValues[numberOfInputLines-1] > timingValues[numberOfInputLines]){                   //Checks if time values are increasing
             printf("The time values need to be non-negative and increasing in value\n");    //If not prints error
             return 3;                                                                   //Breaks out of loop and ends programme
         }
