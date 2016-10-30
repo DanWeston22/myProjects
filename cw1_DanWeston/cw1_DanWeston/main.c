@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+int error();
+
 int main(int argc, const char * argv[]) {
 
     //Checks how many arguents were passed in command line.
@@ -23,13 +25,13 @@ int main(int argc, const char * argv[]) {
         }
         //If not found prints error message and ends program.
         else{
-            printf("User input not in a recognised format.\n");
+            error();
             return 1;
         }
     }
     //If more than 2 arguments prints error message and ends program.
     else if (argc > 2) {
-        printf("User input not in a recognised format.\n");
+        error();
         return 1;
     }
 
@@ -57,20 +59,19 @@ int main(int argc, const char * argv[]) {
         //Variables for splitting up input data.
         char *token = NULL;
         const char space[] = " ";
-        const char newLine[] = "\n";
         char *stopString;
         int inputCharater = 0;
-
+        
         //Checks input for invalid data (charaters & punctuation) if found ends program.
         for (inputCharater = 0; line[inputCharater] != 0; inputCharater++){
             if ((isalpha(line[inputCharater]) != 0) || (ispunct(line[inputCharater]) && line[inputCharater]!='-')){
-                printf ("User input not in a recognised format.\n");
+                error();
                 return 1;
             }
             //If input charater is '-' checks if next charater is a digit, if not prints error and ends program.
             else if (line[inputCharater]=='-'){
                 if (isdigit(line[inputCharater+1]) == 0){
-                    printf ("User input not in a recognised format.\n");
+                    error();
                     return 1;
                 }
             }
@@ -81,9 +82,9 @@ int main(int argc, const char * argv[]) {
         timingInputValue = strtof(token, &stopString);
         
         //Checks for a second value and saves. If there isn't a second value prints error and ends program.
-        token = strtok(NULL, newLine);
+        token = strtok(NULL, space);
         if (token == NULL){
-            printf ("User input not in a recognised format.\n");
+            error();
             return 1;
         }
         midiInputValue = strtof(token, &stopString);
@@ -91,7 +92,7 @@ int main(int argc, const char * argv[]) {
         //If there is a third value prints error and ends program.
         token = strtok(NULL, space);
         if (token != NULL){
-            printf ("User input not in a recognised format.\n");
+            error();
             return 1;
         }
         
@@ -131,5 +132,11 @@ int main(int argc, const char * argv[]) {
                 phase += (omega/sampleFrequency);
             }
     }
+    return 0;
+}
+
+//Function to print error message
+int error() {
+    printf ("User input not in a recognised format.\n");
     return 0;
 }
