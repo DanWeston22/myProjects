@@ -14,19 +14,25 @@
 
 int main(int argc, const char * argv[]) {
 
-    //'-help' Information.
+    //Checks how many arguents were passed in command line.
     if (argc == 2){
-        //Check if user inputed '-help'. If they did prints information.
+        //Checks second argument for '-help'. If found prints information.
         if (strcmp(argv[1], "-help") == 0){
-            printf("Please enter Timing Information and MIDI Note Numbers in the following format:\n<time in milliseconds> <MIDI note number>.\n");
-            return 1;
+            printf("Please enter Timing Information and MIDI Note Numbers in the following format:\n<time in milliseconds> <MIDI note number>.\nThe Timing information should be non-negative, and if multiple timing values are passed they should be increasing in value.\nThe MIDI Note Numbers should be in the range of 0-127.\nTo run the program the last MIDI value entered should be negative (e.g '-1').\nA maximum of 100 note values can be entered.\n");
+            return 0;
         }
-        //If they didn't prints error message and ends program.
-        else {
-            printf("User input not in a recognised format\n");
+        //If not found prints error message and ends program.
+        else{
+            printf("User input not in a recognised format.\n");
             return 1;
         }
     }
+    //If more than 2 arguments prints error message and ends program.
+    else if (argc > 2) {
+        printf("User input not in a recognised format.\n");
+        return 1;
+    }
+
     //Arrays to store input data.
     float timingValues[100];
     float midiValues[100];
@@ -35,6 +41,10 @@ int main(int argc, const char * argv[]) {
     float timingInputValue;
     float midiInputValue;
     int numberOfInputLines = 0;
+    
+    //Initialisation for output loop
+    float phase = 0.0;
+    const int sampleFrequency = 48000.0;
     
     //Count number of input lines.
     for (numberOfInputLines = 0; numberOfInputLines < 100; numberOfInputLines++){
@@ -53,8 +63,15 @@ int main(int argc, const char * argv[]) {
         //Checks input for invalid data (charaters & punctuation) if found ends program.
         for (inputCharater = 0; line[inputCharater] != 0; inputCharater++){
             if ((isalpha(line[inputCharater]) != 0) || (ispunct(line[inputCharater]) && line[inputCharater]!='-')){
-                printf ("User input not in a recognised format\n");
-                return 2;
+                printf ("User input not in a recognised format.\n");
+                return 1;
+            }
+            //If input charater is '-' checks if next charater is a digit, if not prints error and ends program.
+            else if (line[inputCharater]=='-'){
+                if (isdigit(line[inputCharater+1]) == 0){
+                    printf ("User input not in a recognised format.\n");
+                    return 1;
+                }
             }
         }
         
@@ -65,16 +82,16 @@ int main(int argc, const char * argv[]) {
         //Checks for a second value and saves. If there isn't a second value prints error and ends program.
         token = strtok(NULL, space);
         if (token == NULL){
-            printf ("User input not in a recognised format\n");
-            return 2;
+            printf ("User input not in a recognised format.\n");
+            return 1;
         }
         midiInputValue = strtof(token, &stopString);
         
         //If there is a third value prints error and ends program.
         token = strtok(NULL, space);
         if (token != NULL){
-            printf ("User input not in a recognised format\n");
-            return 2;
+            printf ("User input not in a recognised format.\n");
+            return 1;
         }
         
         //Saves timing and MIDI input values into the relevant arrays.
@@ -83,14 +100,14 @@ int main(int argc, const char * argv[]) {
         
         //Checks that MIDI value is valid, if not prints error and ends program.
         if (127 < midiInputValue) {
-            printf ("The MIDI ‘note on’ message contains data out of bounds\n");
-            return 3;
+            printf ("The MIDI ‘note on’ message contains data out of bounds.\n");
+            return 2;
         }
         
-        //Checks that the timing values are increasing, if not prints error and ends program.
-        if (timingValues[numberOfInputLines-1] > timingValues[numberOfInputLines]){
-            printf("The time values need to be non-negative and increasing in value\n");
-            return 4;
+        //Checks that the timing values are increasing, and non negative if not prints error and ends program.
+        if ((timingValues[numberOfInputLines] < 0) || (timingValues[numberOfInputLines-1] >= timingValues[numberOfInputLines] && numberOfInputLines!=0)){
+            printf("The time values need to be non-negative and increasing in value.\n");
+            return 3;
         }
         
         //If MIDI value is < 0, or if the number of input lines has reached 100 breaks out of loop.
@@ -99,18 +116,15 @@ int main(int argc, const char * argv[]) {
         }
     }
 
-    //Loop to cycle through input values and calculate note duration, start time and frequency.
+    //Loop to cycle through input values and calculate note duration, start time, frequency and omega.
     for (int inputNumber = 1; inputNumber <= numberOfInputLines; ++inputNumber) {
             float duration = (timingValues[inputNumber] - timingValues[inputNumber-1]);
             float frequency = 440.0 * pow(2.0, ((midiValues[inputNumber-1] - 69.0)/12.0));
             float startTime = (timingValues[inputNumber-1]);
-            //Declarations
-            const int sampleFrequency = 48000.0;
             float omega = (2.0 * M_PI * frequency);
-            float phase;
         
             //Loop calculates and prints sample values, and increments phase.
-            for (float currentTime; currentTime <= startTime + duration; currentTime += (1000.0/sampleFrequency)){
+            for (float currentTime = startTime; currentTime <= startTime + duration; currentTime += (1000.0/sampleFrequency)){
                 float sampleValues = sin(phase);
                 printf("%.6f\n", sampleValues);
                 phase += (omega/sampleFrequency);
