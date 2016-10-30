@@ -57,6 +57,7 @@ int main(int argc, const char * argv[]) {
         //Variables for splitting up input data.
         char *token = NULL;
         const char space[] = " ";
+        const char newLine[] = "\n";
         char *stopString;
         int inputCharater = 0;
 
@@ -80,7 +81,7 @@ int main(int argc, const char * argv[]) {
         timingInputValue = strtof(token, &stopString);
         
         //Checks for a second value and saves. If there isn't a second value prints error and ends program.
-        token = strtok(NULL, space);
+        token = strtok(NULL, newLine);
         if (token == NULL){
             printf ("User input not in a recognised format.\n");
             return 1;
