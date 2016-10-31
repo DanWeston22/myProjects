@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E19036471DBE34B50018A5EE /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E19036461DBE34B50018A5EE /* main.c */; };
+		E1A5D8B81DC785AD00AC4D36 /* Biquad.c in Sources */ = {isa = PBXBuildFile; fileRef = E1A5D8B61DC785AD00AC4D36 /* Biquad.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		E19036431DBE34B50018A5EE /* Structures */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Structures; sourceTree = BUILT_PRODUCTS_DIR; };
 		E19036461DBE34B50018A5EE /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		E1A5D8B61DC785AD00AC4D36 /* Biquad.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Biquad.c; sourceTree = "<group>"; };
+		E1A5D8B71DC785AD00AC4D36 /* Biquad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Biquad.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				E19036461DBE34B50018A5EE /* main.c */,
+				E1A5D8B61DC785AD00AC4D36 /* Biquad.c */,
+				E1A5D8B71DC785AD00AC4D36 /* Biquad.h */,
 			);
 			path = Structures;
 			sourceTree = "<group>";
@@ -120,6 +125,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E19036471DBE34B50018A5EE /* main.c in Sources */,
+				E1A5D8B81DC785AD00AC4D36 /* Biquad.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +252,7 @@
 				E190364C1DBE34B50018A5EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
