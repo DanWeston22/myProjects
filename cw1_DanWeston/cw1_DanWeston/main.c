@@ -21,17 +21,18 @@ int main( int argc , const char * argv[ ] ) {
         //Checks second argument for '-help'. If found prints information.
         if ( strcmp( argv[ 1 ] , "-help" ) == 0 ) {
             printf( "Please enter Timing Information and MIDI Note Numbers in the following format:\n"
-                    "<time in milliseconds> <MIDI note number>.\nThe Timing information should be non-negative, and if multiple timing values are passed they should be increasing in value.\n"
-                    "The MIDI Note Numbers should be in the range of 0-127.\nTo run the program the last MIDI value entered should be negative (e.g '-1').\n"
-                    "A maximum of 100 note values can be entered.\n" ) ;
+                "<time in milliseconds> <MIDI note number>\n"
+                "The Timing information should be non-negative, and if multiple timing values are passed they should be increasing in value.\n"
+                "The MIDI Note Numbers should be in the range of 0-127.\n"
+                "To run the program the last MIDI value entered should be negative (e.g '-1').\n"
+                "A maximum of 100 note values can be entered.\n" ) ;
             return 0 ;
         }
     }
-    //If more than 2 arguments, or argv[ 1 ] isn't '-help' prints error message and ends program.
+    //If more than 2 arguments, or argv[ 1 ] isn't '-help' ends program.
     if ( ( argc > 2 ) ||
         ( ( argc == 2 ) &&
         ( strcmp ( argv[ 1 ] , "-help" ) != 0 ) ) ) {
-            error() ;
             return 1 ;
         }
 
@@ -53,11 +54,11 @@ int main( int argc , const char * argv[ ] ) {
         numberOfInputLines < 100 ;
         numberOfInputLines++ ) {
         
-        //Gets input from command line and strips newline character.
+        //Gets input from command line and strips newline character replacing it with ' '.
         char *line = NULL ;
         size_t len = 12 ;
         getline( &line , &len , stdin ) ;
-        char blank = '\0';
+        char blank = ' ';
         char* firstNewLine = strstr( line , "\n" ) ;
         *firstNewLine = blank ;
         
@@ -84,6 +85,10 @@ int main( int argc , const char * argv[ ] ) {
         
         //Splits input data and saves first value to timingValue.
         token = strtok( line , space ) ;
+        if ( token == NULL ) {
+            error() ;
+            return 1 ;
+        }
         timingInputValue = strtof( token , &stopString ) ;
         
         //Checks for a second value and saves. If there isn't a second value prints error and ends program.
