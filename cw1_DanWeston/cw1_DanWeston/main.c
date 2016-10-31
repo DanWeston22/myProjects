@@ -53,10 +53,13 @@ int main( int argc , const char * argv[ ] ) {
         numberOfInputLines < 100 ;
         numberOfInputLines++ ) {
         
-        //Gets input from command line.
+        //Gets input from command line and strips newline character.
         char *line = NULL ;
         size_t len = 12 ;
         getline( &line , &len , stdin ) ;
+        char blank = '\0';
+        char* firstNewLine = strstr( line , "\n" ) ;
+        *firstNewLine = blank ;
         
         //Variables for splitting up input data.
         char *token = NULL ;
