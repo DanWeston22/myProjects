@@ -83,7 +83,7 @@ int main( int argc , const char * argv[ ] ) {
             }
         }
         
-        //Splits input data and saves first value to timingValue.
+        //Splits input data and saves 1st value to timingValue, if there isn't a 1st value prints error and ends program.
         token = strtok( line , space ) ;
         if ( token == NULL ) {
             error() ;
@@ -91,7 +91,7 @@ int main( int argc , const char * argv[ ] ) {
         }
         timingInputValue = strtof( token , &stopString ) ;
         
-        //Checks for a second value and saves. If there isn't a second value prints error and ends program.
+        //Checks for a 2nd value and saves. If there isn't a 2nd value prints error and ends program.
         token = strtok( NULL , space ) ;
         if ( token == NULL ) {
             error() ;
@@ -99,7 +99,7 @@ int main( int argc , const char * argv[ ] ) {
         }
         midiInputValue = strtof( token , &stopString ) ;
         
-        //If there is a third value prints error and ends program.
+        //If there is a 3rd value prints error and ends program.
         token = strtok( NULL , space ) ;
         if ( token != NULL ) {
             error() ;
