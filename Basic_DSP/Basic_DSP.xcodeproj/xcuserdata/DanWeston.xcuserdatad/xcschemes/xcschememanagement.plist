@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>05-2_solution.xcscheme</key>
+		<key>Basic_DSP.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,7 +12,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>97F4CFC91DC0A6E20094C3F5</key>
+		<key>E1E92B1D1DD1D37A0074EC5F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
