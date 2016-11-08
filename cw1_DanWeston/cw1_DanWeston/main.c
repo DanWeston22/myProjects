@@ -131,6 +131,8 @@ int main( int argc , const char * argv[ ] ) {
         }
     }
 
+    FILE * outputFile = fopen( "outputFile" , "w" ) ;
+    
     //Loop to cycle through input values and calculate note duration, start time, frequency and omega.
     for ( int inputNumber = 1 ;
         inputNumber <= numberOfInputLines ;
@@ -146,8 +148,11 @@ int main( int argc , const char * argv[ ] ) {
                 currentTime += ( 1000.0 / sampleFrequency ) ){
                 float sampleValues = sin( phase ) ;
                 printf( "%.6f\n" , sampleValues ) ;
+                size_t output = fwrite( &sampleValues , sizeof ( float ) , 1 , outputFile ) ;
+                fwrite( &sampleValues , sizeof ( float ) , 1 , outputFile ) ;
                 phase += ( omega / sampleFrequency ) ;
             }
+        int close = fclose( outputFile ) ;
     }
     return 0 ;
 }

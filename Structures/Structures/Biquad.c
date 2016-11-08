@@ -10,6 +10,10 @@
 #include <math.h>
 #include <complex.h>
 
+struct biquad {
+    int freqNum;
+};
+
 int b0 = 1 ;
 int b1 = -2 ;
 int b2 = 1 ;
@@ -20,7 +24,7 @@ double a2 = 0.17 ;
 float freq[] = { 50 , 100 , 200 , 400 , 800 , 1600 , 3200 , 6400 , 12800 , 20000 } ;
 double PI2 = ( 2 * M_PI ) ; //Does equation (j * 2 * Pi)
 
-float biquadFunction( int freqNum ) {
+float biquadFunction( freqNum ) {
     double T = ( 1.0 / 44100.0 ) ; //States T as 1/sampling freq
     float complex z = cexp( freq[ freqNum ] * PI2 * T ) ; //States z as e^(freq * jPI2 * T)
     float complex topLine = ( b0 + ( b1 * cpow( z, -1 ) ) + ( b2 * cpow( z, -2 ) ) ) ;//Maths..

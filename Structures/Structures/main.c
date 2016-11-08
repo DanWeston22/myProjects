@@ -6,6 +6,7 @@
 //  Copyright © 2016 Dan Weston. All rights reserved.
 //
 
+#include <stdio.h>
 #include "Biquad.h"
 
 int main(int argc, const char * argv[]) {
@@ -13,7 +14,7 @@ int main(int argc, const char * argv[]) {
     for ( int freqNum = 0 ;
         freqNum < 10 ;
         freqNum++) {
-        printf ( "%.2f\n" , biquadFunction( freqNum ) ) ;
+        printf ( "%.2f\n" , biquadFunction( *freqNum ) ) ;
     }
     return 0;
 }

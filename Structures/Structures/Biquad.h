@@ -9,8 +9,7 @@
 #ifndef Biquad_h
 #define Biquad_h
 
-#include <stdio.h>
-
 float biquadFunction( int freqNum ) ;
+struct biquad ;
 
 #endif /* Biquad_h */
