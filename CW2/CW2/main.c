@@ -42,8 +42,8 @@ int main(int argc, const char * argv[]) {
         }
     }
 
-    const char * in_filname = "Hard Reality.wav";
-    const char * out_filname = "Filtered.wav";
+    const char * in_filname = argv[1];
+    const char * out_filname = argv[2];
     
     SF_INFO sfinfo;
     
@@ -67,7 +67,7 @@ int main(int argc, const char * argv[]) {
     }
     
     int fs = sfinfo.samplerate;
-    int fc = 1000;
+    int fc = atof(argv[3]);
     
     //Do some error checking
     
@@ -108,7 +108,7 @@ int main(int argc, const char * argv[]) {
                 Y += filterCoefficients[incriment]*X[BUFFIX(ix,  -incriment)];
             }
             ix = BUFFIX(ix, 1);
-            buffer[n] = Y;
+            buffer[n] = Y/2;
         }
         numFramesWritten = sf_writef_float(sf_file_out, buffer, numFramesRead);
     }

@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E1740EEC1DEC4034008717D1"
-               BuildableName = "CW2"
-               BlueprintName = "CW2"
-               ReferencedContainer = "container:CW2.xcodeproj">
+               BlueprintIdentifier = "E1740F071DEC68E5008717D1"
+               BuildableName = "Class&apos;"
+               BlueprintName = "Class&apos;"
+               ReferencedContainer = "container:Class&apos;.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E1740EEC1DEC4034008717D1"
-            BuildableName = "CW2"
-            BlueprintName = "CW2"
-            ReferencedContainer = "container:CW2.xcodeproj">
+            BlueprintIdentifier = "E1740F071DEC68E5008717D1"
+            BuildableName = "Class&apos;"
+            BlueprintName = "Class&apos;"
+            ReferencedContainer = "container:Class&apos;.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -55,26 +55,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E1740EEC1DEC4034008717D1"
-            BuildableName = "CW2"
-            BlueprintName = "CW2"
-            ReferencedContainer = "container:CW2.xcodeproj">
+            BlueprintIdentifier = "E1740F071DEC68E5008717D1"
+            BuildableName = "Class&apos;"
+            BlueprintName = "Class&apos;"
+            ReferencedContainer = "container:Class&apos;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "noise.wav"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "filtered.wav"
-            isEnabled = "YES">
-         </CommandLineArgument>
-         <CommandLineArgument
-            argument = "1000"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -88,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E1740EEC1DEC4034008717D1"
-            BuildableName = "CW2"
-            BlueprintName = "CW2"
-            ReferencedContainer = "container:CW2.xcodeproj">
+            BlueprintIdentifier = "E1740F071DEC68E5008717D1"
+            BuildableName = "Class&apos;"
+            BlueprintName = "Class&apos;"
+            ReferencedContainer = "container:Class&apos;.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
