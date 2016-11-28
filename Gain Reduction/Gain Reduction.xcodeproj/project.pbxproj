@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		E17B73961DD0B8D4005A90FC /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E17B73951DD0B8D4005A90FC /* main.c */; };
 		E17B739D1DD0B8F4005A90FC /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E17B739C1DD0B8F4005A90FC /* libsndfile.a */; };
+		E18D51781DE33C3F004BC80C /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18D51771DE33C3F004BC80C /* Carbon.framework */; };
+		E18D517A1DE33C47004BC80C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18D51791DE33C47004BC80C /* CoreAudio.framework */; };
+		E18D517C1DE33C4F004BC80C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18D517B1DE33C4F004BC80C /* AudioToolbox.framework */; };
+		E18D517E1DE33C58004BC80C /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18D517D1DE33C58004BC80C /* AudioUnit.framework */; };
+		E18D51801DE33C5E004BC80C /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E18D517F1DE33C5E004BC80C /* CoreServices.framework */; };
+		E18D51831DE33FAD004BC80C /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E18D51821DE33FAD004BC80C /* libportaudio.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +33,13 @@
 		E17B73921DD0B8D4005A90FC /* Gain Reduction */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Gain Reduction"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E17B73951DD0B8D4005A90FC /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E17B739C1DD0B8F4005A90FC /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsndfile.a; sourceTree = "<group>"; };
+		E18D51751DE33373004BC80C /* portaudio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = portaudio.h; sourceTree = "<group>"; };
+		E18D51771DE33C3F004BC80C /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		E18D51791DE33C47004BC80C /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		E18D517B1DE33C4F004BC80C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E18D517D1DE33C58004BC80C /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
+		E18D517F1DE33C5E004BC80C /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		E18D51821DE33FAD004BC80C /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportaudio.a; path = ../../portaudio/lib/libportaudio.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +47,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E18D51801DE33C5E004BC80C /* CoreServices.framework in Frameworks */,
+				E18D517E1DE33C58004BC80C /* AudioUnit.framework in Frameworks */,
+				E18D517C1DE33C4F004BC80C /* AudioToolbox.framework in Frameworks */,
+				E18D51831DE33FAD004BC80C /* libportaudio.a in Frameworks */,
+				E18D517A1DE33C47004BC80C /* CoreAudio.framework in Frameworks */,
+				E18D51781DE33C3F004BC80C /* Carbon.framework in Frameworks */,
 				E17B739D1DD0B8F4005A90FC /* libsndfile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -61,7 +80,14 @@
 			isa = PBXGroup;
 			children = (
 				E17B73951DD0B8D4005A90FC /* main.c */,
+				E18D51751DE33373004BC80C /* portaudio.h */,
 				E17B739C1DD0B8F4005A90FC /* libsndfile.a */,
+				E18D51821DE33FAD004BC80C /* libportaudio.a */,
+				E18D51771DE33C3F004BC80C /* Carbon.framework */,
+				E18D51791DE33C47004BC80C /* CoreAudio.framework */,
+				E18D517B1DE33C4F004BC80C /* AudioToolbox.framework */,
+				E18D517D1DE33C58004BC80C /* AudioUnit.framework */,
+				E18D517F1DE33C5E004BC80C /* CoreServices.framework */,
 			);
 			path = "Gain Reduction";
 			sourceTree = "<group>";
@@ -220,11 +246,15 @@
 		E17B739A1DD0B8D4005A90FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "/Users/DanWeston/Desktop/libsndfile-1.0.27/Build/include";
+				HEADER_SEARCH_PATHS = (
+					"/Users/DanWeston/Documents/Tonmeister/Final\\ Year/Audio\\ Programming/myProjects/libsndfile-1.0.27/Build/include",
+					"/Users/DanWeston/Documents/Tonmeister/Final\\ Year/Audio\\ Programming/myProjects/portaudio/include",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Gain\\ Reduction",
-					"/Users/DanWeston/Desktop/libsndfile-1.0.27/Build/lib",
+					"/Users/DanWeston/Documents/Tonmeister/Final\\ Year/Audio\\ Programming/myProjects/libsndfile-1.0.27/Build/lib",
+					"/Users/DanWeston/Documents/Tonmeister/Final\\ Year/Audio\\ Programming/myProjects/portaudio/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -233,11 +263,15 @@
 		E17B739B1DD0B8D4005A90FC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "/Users/DanWeston/Desktop/libsndfile-1.0.27/Build/include";
+				HEADER_SEARCH_PATHS = (
+					"/Users/DanWeston/Documents/Tonmeister/Final\\ Year/Audio\\ Programming/myProjects/libsndfile-1.0.27/Build/include",
+					"/Users/DanWeston/Documents/Tonmeister/Final\\ Year/Audio\\ Programming/myProjects/portaudio/include",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Gain\\ Reduction",
-					"/Users/DanWeston/Desktop/libsndfile-1.0.27/Build/lib",
+					"/Users/DanWeston/Documents/Tonmeister/Final\\ Year/Audio\\ Programming/myProjects/libsndfile-1.0.27/Build/lib",
+					"/Users/DanWeston/Documents/Tonmeister/Final\\ Year/Audio\\ Programming/myProjects/portaudio/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

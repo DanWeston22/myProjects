@@ -226,7 +226,7 @@
 		E1F30A1C1DDB082F004FC4E5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "/Users/DanWeston/Documents/Tonmeister/Final\\ Year/Audio\\ Programming/myProjects/libsndfile-1.0.27/Build/include";
+				HEADER_SEARCH_PATHS = "/Users/DanWeston/Documents/Tonmeister/Final\\ Year/Audio\\ Programming/myProjects/libsndfile-1.0.27/Build/lib";
 				LIBRARY_SEARCH_PATHS = (
 					/Users/DanWeston/Documents/Tonmeister/Final,
 					Year/Audio,
@@ -240,7 +240,7 @@
 		E1F30A1D1DDB082F004FC4E5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "/Users/DanWeston/Documents/Tonmeister/Final\\ Year/Audio\\ Programming/myProjects/libsndfile-1.0.27/Build/include";
+				HEADER_SEARCH_PATHS = "/Users/DanWeston/Documents/Tonmeister/Final\\ Year/Audio\\ Programming/myProjects/libsndfile-1.0.27/Build/lib";
 				LIBRARY_SEARCH_PATHS = (
 					/Users/DanWeston/Documents/Tonmeister/Final,
 					Year/Audio,
@@ -270,6 +270,7 @@
 				E1F30A1D1DDB082F004FC4E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

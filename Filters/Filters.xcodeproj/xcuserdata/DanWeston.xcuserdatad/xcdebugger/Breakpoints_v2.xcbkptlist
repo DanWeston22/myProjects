@@ -14,9 +14,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "fir_create( int fs, double fc, )"
-            landmarkType = "8">
+            endingLineNumber = "26">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

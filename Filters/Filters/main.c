@@ -9,8 +9,8 @@
 
 int main(int argc, const char * argv[]) {
     
-    const char * in_filname = "AveVerum.wav";
-    const char * out_filname = "BiquadFiltered.wav";
+    const char * in_filname = "sinesweep.wav";
+    const char * out_filname = "Filtered.wav";
     
     SF_INFO sfinfo;
     

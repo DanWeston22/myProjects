@@ -19,8 +19,8 @@ typedef float firFloat;
 
 // create a FIR
 extern fir* fir_create(
-                       int fs,
-                       double fc,
+                       int fs
+                       //double fc
                        );
 
 // destroy the fir
