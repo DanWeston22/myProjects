@@ -1,58 +1,57 @@
-//
-//  Class.hpp
-//  Class'
-//
-//  Created by Dan Weston on 28/11/2016.
-//  Copyright © 2016 Dan Weston. All rights reserved.
-//
+#ifndef class_hpp
+#define class_hpp
 
-#ifndef Class_hpp
-#define Class_hpp
 
-#include <stdio.h>
-
-typedef enum {
-    BQ_NONE,
-    BQ_LOWPASS,
-    BQ_HIGHPASS,
-    BQ_BANDPASS,
-    BQ_NOTCH,
-    BQ_PEAK,
-    BQ_LOWSHELF,
-    BQ_HIGHSHELF,
-    BQ_NUM_FILTERS
-} bqFilterType;
-
+#define BQN 3
 
 class biquad {
     
 public:
     
+    enum class filterType {
+        NONE,
+        LOWPASS,
+        HIGHPASS,
+        BANDPASS,
+        NOTCH,
+        PEAK,
+        LOWSHELF,
+        HIGHSHELF
+    };
+    
     biquad(
-           bqFilterType type = BQ_LOWPASS,
+           filterType type = filterType::LOWPASS,
            int fs = 44100,
            double fc = 1000,
            double Q = 0.7071,
            double peakGain = 0
-    );
-    ~biquad(void);
+           );
+    ~biquad(void) = default;
     float process(float);
-
+    static void helloWorld(void);
     
 private:
     
     void calculate(void);
+    
     double m_A[BQN];
     double m_B[BQN];
-    bqFloat m_X[BQN];
-    bqFloat m_Y[BQN];
+    float m_X[BQN];
+    float m_Y[BQN];
     unsigned int m_index;
     double m_fs;
-    bqFilterType m_type;
+    filterType m_type;
     double m_fc;
     double m_Q;
     double m_peakGain;
-
+    
 };
 
-#endif /* Class_hpp */
+class example {
+public:
+    example(double x = 10);
+    void sayHello(const biquad& b);
+};
+
+#endif /* class_hpp */
+

@@ -6,7 +6,7 @@
 // A frame is how many sample periods there are. The total number of samples is
 // the product of the number of frames and the number of channels.
 
-#define FIRN 126
+#define FIRN 127
 
 // return buffer index
 #define BUFFIX(ix,n) ((ix+n+FIRN)%FIRN)
@@ -22,7 +22,7 @@ enum errorCode {
 
 char* errorText(enum errorCode err);
 
-int sinc(double x);
+float sincFunction(float x);
 
 int main(int argc, const char * argv[]) {
     
@@ -66,8 +66,9 @@ int main(int argc, const char * argv[]) {
         goto cleanup;
     }
     
-    int fs = sfinfo.samplerate;
-    int fc = atof(argv[3]);
+    float fs = sfinfo.samplerate;
+    float fc = atof(argv[3]);
+    float fcOverfs = (fc/fs);
     
     //Do some error checking
     
@@ -80,14 +81,13 @@ int main(int argc, const char * argv[]) {
     }
     
     //Function for filter coefficiants
-    double filterCoefficients[FIRN];
+    float filterCoefficients[FIRN];
     for (int incriment = 0; incriment < FIRN; incriment++){
-        //Structure for hamming window which then does following maths
-        double hammingWindow = (0.54 - (0.46 * cos(2.0 * M_PI * incriment/FIRN)));
-        //Structure for sincComponent which then does following maths
-        double x = (((2.0 * incriment) - FIRN * fc)/fs);
-        double sincComponent = ((2.0 * fc)/fs) * sinc(x);
-        filterCoefficients[incriment] = (hammingWindow + sincComponent);
+        float hammingWindow = (0.54 - 0.46 * cos(2.0 * M_PI * incriment/(FIRN-1.0)));
+        float x = (((2.0 * incriment) - (FIRN-1.0)) * fcOverfs);
+        float sincComponent = 2.0 * fcOverfs * sincFunction(x);
+        filterCoefficients[incriment] = (hammingWindow * sincComponent);
+        //printf("%f\n", filterCoefficients[incriment]);
     }
     
     sf_count_t numFramesRead = 0;
@@ -99,16 +99,25 @@ int main(int argc, const char * argv[]) {
     float X[FIRN];
     unsigned int ix = 0;
     
+    
     do {
         numFramesRead = sf_readf_float(sf_file_in, buffer, NUM_FRAMES);
         for (int n = 0; n < numFramesRead*sfinfo.channels; n++) {
             X[BUFFIX(ix,0)] = buffer[n];
-            double Y = 0;
+            float Y = 0.0;
             for (int incriment = 0; incriment < FIRN; incriment++){
                 Y += filterCoefficients[incriment]*X[BUFFIX(ix,  -incriment)];
             }
+            
+            if (Y > 1.0) {
+                Y = 1.0;
+            }
+            else if (Y < -1.0) {
+                Y = -1.0;
+            }
+            
+            buffer[n] = Y;
             ix = BUFFIX(ix, 1);
-            buffer[n] = Y/2;
         }
         numFramesWritten = sf_writef_float(sf_file_out, buffer, numFramesRead);
     }
@@ -129,7 +138,7 @@ cleanup:
 }
 
 //Function for sincFunction
-int sinc(double x){
+float sincFunction(float x){
     if (x==0){
         return 1;
     }
