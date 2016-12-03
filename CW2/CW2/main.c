@@ -3,25 +3,14 @@
 #include <sndfile.h>
 #include "FIRFilter.h"
 
-#define NUM_FRAMES 512
-// A frame is how many sample periods there are. The total number of samples is
-// the product of the number of frames and the number of channels.
-
-#define FIRN 127
-
-// return buffer index
-#define BUFFIX(ix,n) ((ix+n+FIRN)%FIRN)
-
 int main(int argc, const char * argv[]) {
     
     int status = NO_ERROR;
     
+    //Error Checking Input Data
     if ( argc != 4 ) {
         if ( argc == 1 ) {
-            printf("Please enter three command line arguments in this order:\n"
-                   "1) The name of the input file (including the .wav suffix),\n"
-                   "2) The name of the output file (including the .wav suffix), and\n"
-                   "3) The cut-off frequency of the filter (in Hz).\n");
+            status = NEED_HELP;
             goto cleanup;
         }
         else {
@@ -33,60 +22,56 @@ int main(int argc, const char * argv[]) {
     const char * in_filname = argv[1];
     const char * out_filname = argv[2];
     
+    //Get input file information & open
     SF_INFO sfinfo;
-    
     SNDFILE * sf_file_in = sf_open(in_filname, SFM_READ, &sfinfo);
     
+    //Error checking input file
     if (sf_file_in == NULL) {
         status = BAD_FILE;
         goto cleanup;
     }
-    
+
     if (sfinfo.channels > 1) {
         status = NOT_MONO;
         goto cleanup;
     }
     
+    //Create output file
     SNDFILE * sf_file_out = sf_open(out_filname, SFM_WRITE, &sfinfo);
     
+    //Error checking output file
     if (sf_file_out == NULL) {
         status = BAD_FILE;
         goto cleanup;
     }
     
-    float fs = sfinfo.samplerate;
-    float fc = atof(argv[3]);
-    float fcOverfs = (fc/fs);
-    
-    //Do some error checking
-    
+    //Create a buffer for file data
     float *buffer = malloc(sizeof(float)*NUM_FRAMES*sfinfo.channels);
-    // Allocate some memory for the buffer.
     
+    //Error checking buffer memory allocation
     if (buffer == NULL) {
         status = BAD_ALLOC;
         goto cleanup;
     }
     
-    //Function for filter coefficiants
+    //Information for calculating coefficiants
+    float fs = sfinfo.samplerate;
+    float fc = atof(argv[3]);
+    
+    //Calculate filter coefficiants
     float filterCoefficients[FIRN];
     for (int increment = 0; increment < FIRN; increment++){
-        float hammingWindow = (0.54 - 0.46 * cos(2.0 * M_PI * increment/(FIRN-1.0)));
-        float x = (((2.0 * increment) - (FIRN-1.0)) * fcOverfs);
-        float sincComponent = 2.0 * fcOverfs * sincFunction(x);
-        filterCoefficients[increment] = (hammingWindow * sincComponent);
-        //printf("%f\n", filterCoefficients[incriment]);
+        filterCoefficients[increment] = firCoefficiants(increment, fc, fs);
     }
     
+    // Keep track of how many samples have been written to the file.
     sf_count_t numFramesRead = 0;
     sf_count_t numFramesWritten = 0;
-    // Keep track of how many samples have been written to the file.
     
-    // process input ----- CORRECT MATHS NEEDS TO GO HERE -----
-    
+    // process input
     float X[FIRN];
     unsigned int ix = 0;
-    
     
     do {
         numFramesRead = sf_readf_float(sf_file_in, buffer, NUM_FRAMES);
