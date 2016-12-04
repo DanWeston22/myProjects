@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "noise.wav"
+            argument = "sinesweep.wav"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

@@ -7,7 +7,6 @@ int main( int argc , const char * argv[ ] ) {
     
     int status = NO_ERROR ;
     
-    //Error Checking Input Data
     if ( argc != 4 ) {
         if ( argc == 1 ) {
             status = NEED_HELP ;
@@ -22,11 +21,10 @@ int main( int argc , const char * argv[ ] ) {
     const char * in_filname = argv[ 1 ] ;
     const char * out_filname = argv[ 2 ] ;
     
-    //Get input file information & open
+    //Get input file information
     SF_INFO sfinfo ;
     SNDFILE * sf_file_in = sf_open( in_filname , SFM_READ , &sfinfo ) ;
     
-    //Error checking input file
     if ( sf_file_in == NULL ) {
         status = BAD_FILE ;
         goto cleanup ;
@@ -37,22 +35,19 @@ int main( int argc , const char * argv[ ] ) {
         goto cleanup ;
     }
     
-    //Create output file
     SNDFILE * sf_file_out = sf_open( out_filname ,
                                     SFM_WRITE ,
                                     &sfinfo
                                     ) ;
     
-    //Error checking output file
     if ( sf_file_out == NULL ) {
         status = BAD_FILE ;
         goto cleanup ;
     }
     
-    //Create a buffer for file data
-    float *buffer = malloc( sizeof( float ) * NUM_FRAMES * sfinfo.channels ) ;
+    //Creates a buffer for file data
+    float *buffer = malloc( sizeof( float ) * NUM_FRAMES ) ; // Get rid of this...
     
-    //Error checking buffer memory allocation
     if ( buffer == NULL ) {
         status = BAD_ALLOC ;
         goto cleanup ;
@@ -86,7 +81,7 @@ int main( int argc , const char * argv[ ] ) {
                                        buffer ,
                                        NUM_FRAMES ) ;
         for ( int n = 0 ;
-            n < ( numFramesRead * sfinfo.channels ) ;
+            n < ( numFramesRead ) ;
             n++ )
         {
             X[ BUFFIX( ix , 0 ) ] = buffer[ n ] ;
@@ -99,7 +94,14 @@ int main( int argc , const char * argv[ ] ) {
                 filterCoefficients[ increment ]
                 * X[ BUFFIX( ix , -increment ) ] ;
             }
-            clipOutput( Y ) ;
+            
+            if ( Y > 1.0 ) {
+                Y = 1.0 ;
+            }
+            else if ( Y < -1.0 ) {
+                Y = -1.0 ;
+            }
+            
             buffer[n] = Y ;
             ix = BUFFIX( ix , 1 ) ;
         }
@@ -116,9 +118,9 @@ cleanup:
     sf_close( sf_file_out ) ;
     free( buffer ) ;
     
+    //Print error text, only if an error occurred.
     if ( status ) {
         printf( "%s\n" , errorText( status ) ) ;
-        // Print any error text, only if an error occurred.
     }
     
     return status ;

@@ -16,8 +16,6 @@ double firCoefficiants ( int increment ,
                         float fc ,
                         float fs ) ;
 
-float clipOutput ( float Y ) ;
-
 int sf_error ( SNDFILE *sf_file_in ) ;
 
 enum errorCode {

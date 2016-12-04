@@ -2,7 +2,7 @@
 #include "FIRFilter.h"
 #include <sndfile.h>
 
-//Function for sinc maths
+//Calculate sinc
 float sincFunction( float x ) {
     if ( x == 0 ) {
         return 1 ;
@@ -12,7 +12,7 @@ float sincFunction( float x ) {
     }
 }
 
-//Function for filter coefficiants
+//Calculate filter coefficiants
 double firCoefficiants ( int increment ,
                         float fc ,
                         float fs ) {
@@ -24,20 +24,6 @@ double firCoefficiants ( int increment ,
     return ( hammingWindow * sincComponent ) ;
 }
 
-//Clips output if it is greater than 1 or less than -1
-float clipOutput( float Y ) {
-    if ( Y > 1.0 ) {
-        return 1.0 ;
-    }
-    else if ( Y < -1.0 ) {
-        return -1.0 ;
-    }
-    else {
-        return Y ;
-    }
-}
-
-//Error Status Messages
 char* errorText( enum errorCode err ) {
     switch ( err ) {
         case NO_ERROR :
