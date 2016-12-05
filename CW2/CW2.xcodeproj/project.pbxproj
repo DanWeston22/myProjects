@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E10C5F281DF081EB003EA152 /* FIRFilter.c in Sources */ = {isa = PBXBuildFile; fileRef = E10C5F261DF081EB003EA152 /* FIRFilter.c */; };
+		E13908191DF59D0900D1CC72 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E13908181DF59D0900D1CC72 /* libsndfile.a */; };
 		E1740EF11DEC4034008717D1 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E1740EF01DEC4034008717D1 /* main.c */; };
-		E1740EFE1DEC4AD8008717D1 /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1740EFD1DEC4AD8008717D1 /* libsndfile.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,9 +27,9 @@
 /* Begin PBXFileReference section */
 		E10C5F261DF081EB003EA152 /* FIRFilter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = FIRFilter.c; path = ../FIRFilter.c; sourceTree = "<group>"; };
 		E10C5F271DF081EB003EA152 /* FIRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FIRFilter.h; path = ../FIRFilter.h; sourceTree = "<group>"; };
+		E13908181DF59D0900D1CC72 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsndfile.a; sourceTree = "<group>"; };
 		E1740EED1DEC4034008717D1 /* CW2 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CW2; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1740EF01DEC4034008717D1 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		E1740EFD1DEC4AD8008717D1 /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = "../../libsndfile-1.0.27/Build/lib/libsndfile.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,7 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1740EFE1DEC4AD8008717D1 /* libsndfile.a in Frameworks */,
+				E13908191DF59D0900D1CC72 /* libsndfile.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,7 +66,7 @@
 				E1740EF01DEC4034008717D1 /* main.c */,
 				E10C5F261DF081EB003EA152 /* FIRFilter.c */,
 				E10C5F271DF081EB003EA152 /* FIRFilter.h */,
-				E1740EFD1DEC4AD8008717D1 /* libsndfile.a */,
+				E13908181DF59D0900D1CC72 /* libsndfile.a */,
 			);
 			path = CW2;
 			sourceTree = "<group>";
@@ -176,6 +176,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/CW2";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -217,6 +219,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/CW2";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
@@ -226,8 +230,8 @@
 		E1740EF51DEC4034008717D1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "/Users/DanWeston/Desktop/libsndfile-1.0.27/Build/include";
-				LIBRARY_SEARCH_PATHS = "/Users/DanWeston/Desktop/libsndfile-1.0.27/Build/lib";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/CW2";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/CW2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -235,8 +239,8 @@
 		E1740EF61DEC4034008717D1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = "/Users/DanWeston/Desktop/libsndfile-1.0.27/Build/include";
-				LIBRARY_SEARCH_PATHS = "/Users/DanWeston/Desktop/libsndfile-1.0.27/Build/lib";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/CW2";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/CW2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
