@@ -46,7 +46,7 @@ int main( int argc , const char * argv[ ] ) {
     }
     
     //Creates a buffer for file data
-    float *buffer = malloc( sizeof( float ) * NUM_FRAMES ) ; // Get rid of this...
+    float *buffer = malloc( sizeof( float ) * NUM_FRAMES ) ;
     
     if ( buffer == NULL ) {
         status = BAD_ALLOC ;
@@ -72,10 +72,10 @@ int main( int argc , const char * argv[ ] ) {
     sf_count_t numFramesRead = 0 ;
     sf_count_t numFramesWritten = 0 ;
     
-    // Process input
     float X[ FIRN ] ;
     unsigned int ix = 0 ;
     
+    // Process input
     do {
         numFramesRead = sf_readf_float( sf_file_in ,
                                        buffer ,
@@ -95,6 +95,7 @@ int main( int argc , const char * argv[ ] ) {
                 * X[ BUFFIX( ix , -increment ) ] ;
             }
             
+            //Clip output to stop distortion
             if ( Y > 1.0 ) {
                 Y = 1.0 ;
             }
