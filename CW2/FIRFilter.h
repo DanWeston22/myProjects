@@ -7,14 +7,17 @@
 #define NUM_FRAMES 512
 #define FIRN 127 //Filter Order Number + 1.
 
-// return buffer index
-#define BUFFIX( ix , n ) ( ( ix + n + FIRN ) % FIRN )
+typedef struct fir_s {
+    float x[FIRN];
+    float b[FIRN];
+    unsigned int index;
+} fir;
 
-float sincFunction( float x ) ;
+void fir_calculate(fir *f, float fs, float fc);
 
-double firCoefficiants ( int increment ,
-                        float fc ,
-                        float fs ) ;
+float fir_process(fir *f, float x);
+
+void fir_processBlock(fir *f, float * buffer, unsigned int length, unsigned int step);
 
 int sf_error ( SNDFILE *sf_file_in ) ;
 

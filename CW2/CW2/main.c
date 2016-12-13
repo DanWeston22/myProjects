@@ -30,10 +30,10 @@ int main( int argc , const char * argv[ ] ) {
         goto cleanup ;
     }
 
-    if ( sfinfo.channels > 1 ) {
+    /*if ( sfinfo.channels > 1 ) {
         status = NOT_MONO ;
         goto cleanup ;
-    }
+    }*/
     
     SNDFILE * sf_file_out = sf_open( out_filname ,
                                     SFM_WRITE ,
@@ -46,7 +46,7 @@ int main( int argc , const char * argv[ ] ) {
     }
     
     //Creates a buffer for file data
-    float *buffer = malloc( sizeof( float ) * NUM_FRAMES ) ;
+    float *buffer = malloc( sizeof( float ) * NUM_FRAMES * sfinfo.channels ) ;
     
     if ( buffer == NULL ) {
         status = BAD_ALLOC ;
@@ -57,55 +57,24 @@ int main( int argc , const char * argv[ ] ) {
     float fs = sfinfo.samplerate ;
     float fc = atof( argv[ 3 ] ) ;
     
-    //Calculate filter coefficiants
-    float filterCoefficients[ FIRN ] ;
-    for (int increment = 0 ;
-        increment < FIRN ;
-        increment++ ) {
-        filterCoefficients[ increment ] = firCoefficiants( increment ,
-                                                          fc ,
-                                                          fs
-                                                          ) ;
-    }
-    
     // Keep track of how many samples have been written to the file.
     sf_count_t numFramesRead = 0 ;
     sf_count_t numFramesWritten = 0 ;
     
-    float X[ FIRN ] ;
-    unsigned int ix = 0 ;
+    fir *filters = calloc(sfinfo.channels, sizeof(fir));
+    for (int c = 0 ; c < sfinfo.channels; c++ ) {
+        fir_calculate(&filters[c], fs, fc);
+    }
     
     // Process input
     do {
         numFramesRead = sf_readf_float( sf_file_in ,
                                        buffer ,
                                        NUM_FRAMES ) ;
-        for ( int n = 0 ;
-            n < ( numFramesRead ) ;
-            n++ )
-        {
-            X[ BUFFIX( ix , 0 ) ] = buffer[ n ] ;
-            float Y = 0.0 ;
-            for ( int increment = 0 ;
-                 increment < FIRN ;
-                 increment++ )
-            {
-                Y +=
-                filterCoefficients[ increment ]
-                * X[ BUFFIX( ix , -increment ) ] ;
-            }
-            
-            //Clip output to stop distortion
-            if ( Y > 1.0 ) {
-                Y = 1.0 ;
-            }
-            else if ( Y < -1.0 ) {
-                Y = -1.0 ;
-            }
-            
-            buffer[n] = Y ;
-            ix = BUFFIX( ix , 1 ) ;
+        for (int c = 0; c < sfinfo.channels; c++) {
+            fir_processBlock(filters+c, buffer+c, (unsigned int)numFramesRead*sfinfo.channels, sfinfo.channels);
         }
+        
         numFramesWritten = sf_writef_float( sf_file_out ,
                                            buffer ,
                                            numFramesRead ) ;
