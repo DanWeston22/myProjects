@@ -63,7 +63,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "Hard_Reality.wav"
+            argument = "Hard_Reality1.wav"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

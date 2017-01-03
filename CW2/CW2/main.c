@@ -2,6 +2,7 @@
 #include <math.h>
 #include <sndfile.h>
 #include "FIRFilter.h"
+#include "ErrorCodes.h"
 
 int main( int argc , const char * argv[ ] ) {
     
